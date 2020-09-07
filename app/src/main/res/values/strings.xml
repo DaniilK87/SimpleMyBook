@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SimpleMyBook</string>
+    <string name="startButton">Start</string>
+    <string name="stopButton">STOP</string>
+</resources>
