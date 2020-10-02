@@ -9,16 +9,18 @@
     tools:context = ".MainActivity" >
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id = "@+id/appbar"
-        android:layout_width = "match_parent"
-        android:layout_height = "wrap_content" >
-        
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#635C5C">
+
         <androidx.appcompat.widget.Toolbar
-            android:id = "@+id/toolbar"
-            android:layout_width = "match_parent"
-            android:layout_height = "wrap_content"
-            app:title = "SimpleMyBook"
-            app:layout_scrollFlags = "scroll|enterAlways"/>
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:title="SimpleMyBook"
+            app:titleTextColor="#0C0101" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView

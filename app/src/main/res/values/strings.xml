@@ -1,8 +1,9 @@
 <resources>
-    <string name="app_name">SimpleMyBook</string>
-    <string name="startButton">Start</string>
-    <string name="stopButton">STOP</string>
-    <string name="headAN">Заголовок</string>
-    <string name="textAN">Текст заметки</string>
-    <string name="new_note_title">tittleNA</string>
+<string name="app_name">SimpleMyBook</string>
+<string name="startButton">Start</string>
+<string name="stopButton">STOP</string>
+<string name="headAN">Заголовок</string>
+<string name="textAN">Текст заметки</string>
+<string name="new_note_title">Создание новой заметки</string>
+<string name="new_note">Новая заметка</string>
 </resources>

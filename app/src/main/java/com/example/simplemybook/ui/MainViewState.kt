@@ -2,9 +2,7 @@ package com.example.simplemybook.ui
 
 
 import com.example.simplemybook.data.Note
+import com.example.simplemybook.ui.base.BaseViewState
 
-class MainViewState (val notes: List<Note>) {
-    fun copy(notes: List<Note>): MainViewState? {
-        TODO("Not yet implemented")
-    }
-}
+class MainViewState (notes: List<Note>? = null , error: Throwable? = null)
+    : BaseViewState<List<Note>?>(notes, error)

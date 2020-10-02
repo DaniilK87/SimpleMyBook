@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "898109833414",
+    "firebase_url": "https://deadliner-f5beb.firebaseio.com",
+    "project_id": "deadliner-f5beb",
+    "storage_bucket": "deadliner-f5beb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:898109833414:android:1afba04d794fff054617c7",
+        "android_client_info": {
+          "package_name": "com.example.simplemybook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "898109833414-6du08eejrco5vifu9ut2qr22n8uvahdk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.simplemybook",
+            "certificate_hash": "3520534c402532460ba0947b531df19838deb4b3"
+          }
+        },
+        {
+          "client_id": "898109833414-glboitovg3a32tp5v2f2dalrh3hc65qe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYI2jKyXfTZ-iEM7EypP4gvAlbcpmrd-0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "898109833414-glboitovg3a32tp5v2f2dalrh3hc65qe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
