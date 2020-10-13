@@ -1,5 +1,5 @@
 <resources>
-<string name="app_name">SimpleMyBook</string>
+<string name="app_name">SimpleBook</string>
 <string name="startButton">Start</string>
 <string name="stopButton">STOP</string>
 <string name="headAN">Заголовок</string>

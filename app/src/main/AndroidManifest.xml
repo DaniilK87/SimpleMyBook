@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.daniilk87.simplemybook">
+    package="com.daniilk87.simplebook">
 
     <application
         android:allowBackup="true"
@@ -10,11 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".ui.note.NoteActivity"/>
+        <activity android:name="com.daniilk87.simplebook.MainActivity"/>
+        <activity android:name="com.daniilk87.simplebook.ui.note.NoteActivity"/>
 
         <activity
-            android:name=".ui.splash.SplashActivity"
+            android:name="com.daniilk87.simplebook.ui.splash.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

@@ -8,17 +8,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:736902175654:android:42b2586fe6cb80b579cd67",
+        "mobilesdk_app_id": "1:736902175654:android:b4ff933d1de0a7de79cd67",
         "android_client_info": {
-          "package_name": "com.daniilk87.simplemybook"
+          "package_name": "com.daniilk87.simplebook"
         }
       },
       "oauth_client": [
         {
-          "client_id": "736902175654-g55n3b2ksj29fr884fdcjme4oo7i3l3o.apps.googleusercontent.com",
+          "client_id": "736902175654-ilovved2o0d8grndor69a2k0eirrn83o.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.daniilk87.simplemybook",
+            "package_name": "com.daniilk87.simplebook",
             "certificate_hash": "3520534c402532460ba0947b531df19838deb4b3"
           }
         },
