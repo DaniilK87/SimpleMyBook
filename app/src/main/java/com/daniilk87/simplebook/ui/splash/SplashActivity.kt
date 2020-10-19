@@ -1,16 +1,14 @@
 package com.daniilk87.simplebook.ui.splash
 
 import android.os.Handler
-import androidx.lifecycle.ViewModelProviders
-import com.daniilk87.simplebook.MainActivity
 import com.daniilk87.simplebook.ui.base.BaseActivity
+import com.daniilk87.simplebook.ui.main.MainActivity
+import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class SplashActivity : BaseActivity<Boolean?, SplashViewState>(){
 
-    override val viewModel by lazy {
-        ViewModelProviders.of(this). get (SplashViewModel::class.java)
-    }
+    override val viewModel:SplashViewModel by viewModel()
 
     override val layoutRes = null
 

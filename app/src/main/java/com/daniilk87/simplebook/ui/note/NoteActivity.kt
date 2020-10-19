@@ -1,35 +1,41 @@
 package com.daniilk87.simplebook.ui.note
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.Menu
 import android.view.MenuItem
 import androidx.lifecycle.ViewModelProviders
 import com.daniilk87.simplebook.R
 import com.daniilk87.simplebook.data.Note
-import com.daniilk87.simplebook.data.extensions.format
-import com.daniilk87.simplebook.data.extensions.getColorInt
+import com.daniilk87.simplebook.extensions.getColorInt
 import com.daniilk87.simplebook.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_note.*
+import org.koin.android.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
-class NoteActivity : BaseActivity<Note?, NoteViewState>() {
+class NoteActivity : BaseActivity<NoteViewState.Data, NoteViewState>() {
     companion object {
         private const val NOTE_KEY = "note"
         private const val DATE_FORMAT = "dd.MM.yy HH:mm"
 
-        fun start(context: Context, noteId: String? = null) = Intent(context, NoteActivity::class.java).apply {
+        fun start(context: Context, noteId: String? = null) =
+            Intent(context, NoteActivity::class.java).apply {
             putExtra(NOTE_KEY, noteId)
             context.startActivity(this)
         }
     }
 
     override val layoutRes: Int = R.layout.activity_note
-    private var note: Note? = null
-    override val viewModel by lazy {ViewModelProviders.of(this). get(NoteViewModel:: class.java)}
+    private var  note: Note? = null
+
+    override val viewModel: NoteViewModel by viewModel()
+
+    var color: Note.Color = Note.Color.WHITE
 
     val textWatcher = object : TextWatcher {
         override fun afterTextChanged(s: Editable?) {
@@ -54,21 +60,25 @@ class NoteActivity : BaseActivity<Note?, NoteViewState>() {
         }
     }
 
-    override fun renderData(data: Note?) {
-        this.note = data
-        supportActionBar?.title = note?.let {
-            SimpleDateFormat(DATE_FORMAT, Locale.getDefault()).format(it.lastChanged)
-        }?: getString(R.string.new_note_title)
-        initView()
+    override fun renderData(data: NoteViewState.Data) {
+        if (data.isDeleted) {
+            finish()
+            return
+        }
     }
 
     private fun initView() {
-        note?.run {
-            supportActionBar?.title = lastChanged.format()
-            titleEt.setText(title)
-            bodyEt.setText(textNote)
-            toolbar.setBackgroundColor(color.getColorInt( this@NoteActivity ))
+        titleEt.removeTextChangedListener(textWatcher)
+        bodyEt.removeTextChangedListener(textWatcher)
+
+        note?.let {
+            titleEt.setTextKeepState(it.title)
+            bodyEt.setTextKeepState(it.textNote)
+            toolbar.setBackgroundColor(it.color.getColorInt(this))
         }
+
+        titleEt.addTextChangedListener(textWatcher)
+        bodyEt.addTextChangedListener(textWatcher)
     }
 
     private fun saveNote() {
@@ -86,12 +96,31 @@ class NoteActivity : BaseActivity<Note?, NoteViewState>() {
 
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?) = menuInflater.inflate(R.menu.menu_note, menu).let {true}
+
+
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.palette -> choosePalette().let { true }
+        R.id.delete -> deleteNote().let { true }
         android.R.id.home -> {
             onBackPressed()
             true
         }
         else -> super.onOptionsItemSelected(item)
+    }
+
+    fun choosePalette() {
+        if (colorPicker.isOpen) {
+            colorPicker.close()
+        } else {colorPicker.open()}
+    }
+
+    fun deleteNote() {
+        AlertDialog.Builder(this)
+            .setMessage("Удалить?")
+            .setNegativeButton("Нет") {dialog, which -> dialog.dismiss()}
+            .setPositiveButton("Да")  {dialog, which -> viewModel.deleteNote()}
+            .show()
     }
 
 }

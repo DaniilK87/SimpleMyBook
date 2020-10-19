@@ -3,6 +3,6 @@
     xmlns:app = "http://schemas.android.com/apk/res-auto" >
     <item
         android:id = "@+id/logout"
-        android:title = "@string/autorization"
+        android:title = "@string/exit"
         app:showAsAction = "never"/>
 </menu>

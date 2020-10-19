@@ -1,4 +1,4 @@
-package com.daniilk87.simplebook.ui
+package com.daniilk87.simplebook.ui.main
 
 
 import com.daniilk87.simplebook.data.Note

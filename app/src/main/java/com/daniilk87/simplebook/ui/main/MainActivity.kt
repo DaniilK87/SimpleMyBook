@@ -1,4 +1,4 @@
-package com.daniilk87.simplebook
+package com.daniilk87.simplebook.ui.main
 
 
 import android.content.Context
@@ -7,31 +7,30 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.view.View
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
+import com.daniilk87.simplebook.LogoutDialog
+import com.daniilk87.simplebook.R
 import com.daniilk87.simplebook.data.Note
-import com.daniilk87.simplebook.ui.MainAdapter
-import com.daniilk87.simplebook.ui.MainViewModel
-import com.daniilk87.simplebook.ui.MainViewState
+import com.daniilk87.simplebook.data.provider.FireStoreProvider
 import com.daniilk87.simplebook.ui.base.BaseActivity
 import com.daniilk87.simplebook.ui.note.NoteActivity
 import com.daniilk87.simplebook.ui.splash.SplashActivity
 import com.firebase.ui.auth.AuthUI
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class MainActivity:BaseActivity<List<Note>?, MainViewState>(), LogoutDialog.LogoutListener {
+
+    val fireStoreProvider: FireStoreProvider by inject()
 
     companion object {fun getStartIntent(context: Context) = Intent(context,
         MainActivity::class.java).apply { context.startActivity(this) }
     }
 
-    override val viewModel:MainViewModel by lazy {
-        ViewModelProviders.of(this).get(MainViewModel::class.java)
-    }
-
+    override val viewModel:MainViewModel by viewModel()
     override val layoutRes: Int = R.layout.activity_main
     lateinit var adapter : MainAdapter
 

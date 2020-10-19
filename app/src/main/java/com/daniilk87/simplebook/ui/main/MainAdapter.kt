@@ -1,4 +1,4 @@
-package com.daniilk87.simplebook.ui
+package com.daniilk87.simplebook.ui.main
 
 import android.view.LayoutInflater
 import android.view.View

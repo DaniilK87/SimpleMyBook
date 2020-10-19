@@ -3,15 +3,13 @@
     package="com.daniilk87.simplebook">
 
     <application
+        android:name=".ui.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
-        <activity android:name="com.daniilk87.simplebook.MainActivity"/>
-        <activity android:name="com.daniilk87.simplebook.ui.note.NoteActivity"/>
 
         <activity
             android:name="com.daniilk87.simplebook.ui.splash.SplashActivity"
@@ -22,6 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <activity android:name="com.daniilk87.simplebook.ui.main.MainActivity"/>
+        <activity android:name="com.daniilk87.simplebook.ui.note.NoteActivity"/>
 
     </application>
 

@@ -1,4 +1,4 @@
-package com.daniilk87.simplebook.ui
+package com.daniilk87.simplebook.ui.main
 
 import androidx.lifecycle.Observer
 import com.daniilk87.simplebook.data.Note
@@ -6,8 +6,7 @@ import com.daniilk87.simplebook.data.Repository
 import com.daniilk87.simplebook.data.model.NoteResult
 import com.daniilk87.simplebook.ui.base.BaseViewModel
 
-class MainViewModel (val repository: Repository = Repository) :
-    BaseViewModel<List<Note>?, MainViewState>() {
+class MainViewModel (val repository: Repository) : BaseViewModel<List<Note>?, MainViewState>() {
     private val notesObserver = object:Observer<NoteResult> {
         override fun onChanged (t:NoteResult?) {
             if (t == null) return

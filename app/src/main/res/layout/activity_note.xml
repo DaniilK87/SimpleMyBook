@@ -18,6 +18,21 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:layout_scrollFlags="scroll|enterAlways"
             app:titleTextColor="#090000" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.daniilk87.simplebook.ui.customview.ColorPickerView
+                android:id="@+id/colorPicker"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"/>
+        </HorizontalScrollView>
     </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
@@ -48,6 +63,6 @@
             android:autofillHints=""
             android:background="@null"
             android:hint="@string/textAN"
-            android:inputType="date"/>
+            android:inputType="text"/>
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
