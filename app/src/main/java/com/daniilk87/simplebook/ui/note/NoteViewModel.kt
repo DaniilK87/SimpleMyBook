@@ -4,12 +4,11 @@ import com.daniilk87.simplebook.data.Note
 import com.daniilk87.simplebook.data.Repository
 import com.daniilk87.simplebook.data.model.NoteResult
 import com.daniilk87.simplebook.ui.base.BaseViewModel
+import kotlinx.coroutines.launch
 
-class NoteViewModel(val repository: Repository) : BaseViewModel<NoteViewState.Data, NoteViewState>() {
+class NoteViewModel(val repository: Repository) : BaseViewModel<NoteData>() {
 
-    init {
-        viewStateLiveData.value = NoteViewState()
-    }
+
 
     private var pendingNote: Note? = null
 
@@ -17,34 +16,30 @@ class NoteViewModel(val repository: Repository) : BaseViewModel<NoteViewState.Da
         pendingNote = note
     }
 
-    fun loadNote(noteId: String) {
-        repository.getNoteById(noteId).observeForever { result ->
-            result ?: return@observeForever
-            when(result){
-                is NoteResult.Success<*> -> {
-                    pendingNote = result.data as? Note
-                    viewStateLiveData.value = NoteViewState(NoteViewState.Data(note = pendingNote))
-                }
-                is NoteResult.Error -> viewStateLiveData.value = NoteViewState(error = result.error)
+    fun loadNote(noteId: String) = launch {
+        try {
+            repository.getNoteById(noteId).let {
+                setData(NoteData(note = it))
             }
+        } catch (e: Throwable) {
+            setError(e)
         }
     }
 
-    fun deleteNote() {
-        pendingNote?.let {repository.deleteNotes(it.id).observeForever { result ->
-            result ?: return@observeForever
-            pendingNote = null
-            when(result) {
-                is NoteResult.Success<*> -> viewStateLiveData.value = NoteViewState(NoteViewState.Data(isDeleted = true))
-                is NoteResult.Error -> viewStateLiveData.value = NoteViewState(error = result.error)
-            }
-            }
+
+    fun deleteNote() = launch {
+        try {
+            pendingNote?.let { repository.deleteNotes(it.id)}
+            setData(NoteData(isDeleted = true))
+        }catch (e:Throwable) {
+            setError(e)
         }
     }
 
     override fun onCleared() {
-        pendingNote?.let {
+        launch {pendingNote?.let {
             repository.saveNote(it)
+            }
         }
     }
 

@@ -22,11 +22,11 @@ import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
-class MainActivity:BaseActivity<List<Note>?, MainViewState>(), LogoutDialog.LogoutListener {
+class MainActivity:BaseActivity<List<Note>?>(), LogoutDialog.LogoutListener {
 
-    val fireStoreProvider: FireStoreProvider by inject()
 
-    companion object {fun getStartIntent(context: Context) = Intent(context,
+    companion object {
+        fun getStartIntent(context: Context) = Intent(context,
         MainActivity::class.java).apply { context.startActivity(this) }
     }
 
@@ -52,10 +52,6 @@ class MainActivity:BaseActivity<List<Note>?, MainViewState>(), LogoutDialog.Logo
         data?.let { adapter.notes= it }
     }
 
-    private fun openNoteScreen (note: Note?) {
-        val intent = NoteActivity.start(this, note?.id)
-        startActivity(intent)
-    }
 
     override fun onCreateOptionsMenu (menu: Menu?): Boolean =
         MenuInflater(this).inflate(R.menu.menu_main, menu).let { true }

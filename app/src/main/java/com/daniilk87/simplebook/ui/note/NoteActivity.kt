@@ -8,7 +8,6 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
-import androidx.lifecycle.ViewModelProviders
 import com.daniilk87.simplebook.R
 import com.daniilk87.simplebook.data.Note
 import com.daniilk87.simplebook.extensions.getColorInt
@@ -18,7 +17,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
-class NoteActivity : BaseActivity<NoteViewState.Data, NoteViewState>() {
+class NoteActivity : BaseActivity<NoteData>() {
     companion object {
         private const val NOTE_KEY = "note"
         private const val DATE_FORMAT = "dd.MM.yy HH:mm"
@@ -34,7 +33,6 @@ class NoteActivity : BaseActivity<NoteViewState.Data, NoteViewState>() {
     private var  note: Note? = null
 
     override val viewModel: NoteViewModel by viewModel()
-
     var color: Note.Color = Note.Color.WHITE
 
     val textWatcher = object : TextWatcher {
@@ -60,7 +58,7 @@ class NoteActivity : BaseActivity<NoteViewState.Data, NoteViewState>() {
         }
     }
 
-    override fun renderData(data: NoteViewState.Data) {
+    override fun renderData(data: NoteData) {
         if (data.isDeleted) {
             finish()
             return
@@ -75,10 +73,18 @@ class NoteActivity : BaseActivity<NoteViewState.Data, NoteViewState>() {
             titleEt.setTextKeepState(it.title)
             bodyEt.setTextKeepState(it.textNote)
             toolbar.setBackgroundColor(it.color.getColorInt(this))
+            SimpleDateFormat(DATE_FORMAT, Locale.getDefault()).format(it.lastChanged)
+
         }
 
         titleEt.addTextChangedListener(textWatcher)
         bodyEt.addTextChangedListener(textWatcher)
+
+        colorPicker.onColorClickListener = {
+            color = it
+            toolbar.setBackgroundColor(it.getColorInt(this))
+            saveNote()
+        }
     }
 
     private fun saveNote() {

@@ -9,29 +9,57 @@ import com.daniilk87.simplebook.data.error.NoAuthException
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.channels.consumeEach
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 
-abstract class BaseActivity < T, S : BaseViewState<T >> : AppCompatActivity() {
+abstract class BaseActivity <S> : AppCompatActivity(), CoroutineScope {
+
+    override val coroutineContext: CoroutineContext by lazy {
+        Dispatchers.Main + Job()
+    }
 
     companion object {private const val RC_SIGN_IN = 458}
 
-    abstract val viewModel: BaseViewModel<T, S>
+    abstract val viewModel: BaseViewModel<S>
     abstract val layoutRes: Int?
+
+    private lateinit var dataJob: Job
+    private lateinit var errorJob: Job
 
     override fun onCreate (savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         layoutRes?.let {
             setContentView(it)
         }
-        viewModel.getViewState().observe(this, androidx.lifecycle.Observer {state ->
-            state?: return@Observer
-            state.error?.let{
-                renderError(it)
-                return@Observer
-            }
-            renderData(state.data)
-        })
     }
+
+    override fun onStart() {
+        super.onStart()
+        dataJob = launch {
+            viewModel.getViewState().consumeEach {
+                renderData(it)
+            }
+        }
+        errorJob = launch {
+            viewModel.getViewError().consumeEach {
+                renderError(it)
+            }
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        dataJob.cancel()
+        errorJob.cancel()
+    }
+
+    abstract fun renderData (data : S)
+
 
     protected fun renderError (error: Throwable ) {
         when (error) {
@@ -60,8 +88,6 @@ abstract class BaseActivity < T, S : BaseViewState<T >> : AppCompatActivity() {
             finish()
         }
     }
-
-    abstract fun renderData (data : T)
 
 
     protected fun showError (error: String ) {
