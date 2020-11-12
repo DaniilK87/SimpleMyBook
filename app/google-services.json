@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "736902175654",
+    "firebase_url": "https://simplebook-5bee4.firebaseio.com",
+    "project_id": "simplebook-5bee4",
+    "storage_bucket": "simplebook-5bee4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:736902175654:android:b4ff933d1de0a7de79cd67",
+        "android_client_info": {
+          "package_name": "com.daniilk87.simplebook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "736902175654-ilovved2o0d8grndor69a2k0eirrn83o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.daniilk87.simplebook",
+            "certificate_hash": "3520534c402532460ba0947b531df19838deb4b3"
+          }
+        },
+        {
+          "client_id": "736902175654-5q2m89sqi31vjc0qgl2p3s29cfmude7m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqsyTjY_rYFQUj9w-wH-yvsHQzspxlHdE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "736902175654-5q2m89sqi31vjc0qgl2p3s29cfmude7m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
